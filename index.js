@@ -6,7 +6,12 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      "https://folio2k24node-br6xpxkxh-tomasferrerasdevs-projects.vercel.app",
+  })
+);
 const port = process.env.PORT;
 app.use(bodyParser.json());
 
@@ -20,8 +25,7 @@ app.post("/api/contact", (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    port: 587,
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
@@ -44,11 +48,8 @@ app.post("/api/contact", (req, res) => {
       res.send("success");
     }
   });
+
+  console.log("FINISH");
 });
 
-module.exports = (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://folio2k24node-br6xpxkxh-tomasferrerasdevs-projects.vercel.app/"
-  );
-};
+module.exports = app;
