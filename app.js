@@ -46,4 +46,9 @@ app.post("/api/contact", (req, res) => {
   });
 });
 
-module.exports = app;
+module.exports = (req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://folio2k24node-br6xpxkxh-tomasferrerasdevs-projects.vercel.app/"
+  );
+};
